@@ -1,0 +1,35 @@
+FROM node:18-alpine AS build
+
+ARG NEXT_PUBLIC_SERVER_URL
+ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
+
+RUN apk update && apk add --no-cache bash
+WORKDIR /app
+
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm ci
+
+COPY . .
+
+# Build the Next.js application
+RUN npm run build
+
+# Remove development dependencies
+RUN npm prune --production
+
+# * Create a new image for production
+FROM node:18-alpine
+
+RUN apk update && apk add --no-cache bash
+WORKDIR /app
+
+# Copy the built application from the build stage
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/package.json ./package.json
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

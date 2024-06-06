@@ -1,0 +1,43 @@
+{
+  "name": "form-creator",
+  "scripts": {
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@mui/material": "^5.15.9",
+    "@reduxjs/toolkit": "^2.1.0",
+    "@heroicons/react": "^2.1.1",
+    "axios": "^1.6.7",
+    "daisyui": "^4.6.2",
+    "lodash": "^4.17.21",
+    "next": "^14.0.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^9.1.0",
+    "react-dropzone": "^14.2.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.202",
+    "@types/node": "20.11.17",
+    "@types/nodemailer": "^6.4.11",
+    "@types/react": "18.2.55",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@types/js-yaml": "^4.0.9",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-next": "^14.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.2",
+    "postcss": "^8.4.34",
+    "prettier": "^3.1.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,7 @@
+/**
+ * Configuration file for ESLint in TypeScript project.
+ */
+ {
+    "extends": "./tsconfig.json",
+    "include": ["./**/*.ts", "./**/*.js", "./.*.js"]
+}
