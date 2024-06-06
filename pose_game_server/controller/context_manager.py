@@ -3,11 +3,6 @@ from contextvars import ContextVar
 
 from fastapi import Depends, Request
 from logger import logger
-from motor.motor_asyncio import (
-    AsyncIOMotorClient,
-    AsyncIOMotorCollection,
-    AsyncIOMotorDatabase,
-)
 from utils.exceptions import AppException
 
 # context_api_id stores unique id for every request

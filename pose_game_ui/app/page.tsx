@@ -1,5 +1,5 @@
 'use client'
-import WebsiteScreen from '@/lib/components/WebsiteScreen''
+import WebsiteScreen from '@/lib/components/WebsiteScreen'
 
 export default function Home() {
 

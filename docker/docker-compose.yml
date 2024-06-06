@@ -12,13 +12,16 @@ services:
       - NEXT_PUBLIC_SERVER_URL=${SERVER_URL}
     ports:
       - '3000:3000'
+    volumes:
+      - "../pose_game_ui:/app"
+      - "/app/node_modules"
 
   pose-game-server:
-    container_name: pose-game-server
+    container_name: pose_game_server
     build:
       context: ../pose_game_server
       dockerfile: Dockerfile
     ports:
       - '8000:8000'
     volumes:
-      - "../backend/test_builder_server:/app"
+      - "../pose_game_server:/app"
