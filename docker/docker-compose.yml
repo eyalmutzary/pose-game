@@ -1,10 +1,10 @@
 version: '3.5'
 
 services:
-  pose-game-ui:
-    container_name: pose-game-ui
+  client:
+    container_name: client
     build:
-      context: ../pose_game_ui
+      context: ../client
       dockerfile: "Dockerfile.${RUN_MODE}"
       args:
         - NEXT_PUBLIC_SERVER_URL=${SERVER_URL}
@@ -13,15 +13,15 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - "../pose_game_ui:/app"
+      - "../client:/app"
       - "/app/node_modules"
 
-  pose-game-server:
-    container_name: pose_game_server
+  server:
+    container_name: server
     build:
-      context: ../pose_game_server
+      context: ../server
       dockerfile: Dockerfile
     ports:
       - '8000:8000'
     volumes:
-      - "../pose_game_server:/app"
+      - "../server:/app"
