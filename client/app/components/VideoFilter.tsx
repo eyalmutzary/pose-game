@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Webcam from "react-webcam";
 import axios from 'axios';
 
 const VideoFilter = () => {
     const webcamRef = useRef(null);
-    const canvasRef = useRef(null);
+    const [currentPose, setCurrentPose] = useState(null);
   
     // Main function
     const runCoco = async () => {
@@ -38,20 +38,11 @@ const VideoFilter = () => {
             const response = await axios.post('https://ubuvdip2130:8001/images/analyze', { image: imageSrc })
             // const data = await response.json();
             console.log(response.data);
+            setCurrentPose(response.data.data ?? "None");
           } catch (error) {
             console.error('Error sending image:', error);
           }
         }
-        // Set canvas height and width
-        // canvasRef.current.width = videoWidth;
-        // canvasRef.current.height = videoHeight;
-  
-        // Make Detections
-        // const obj = await net.detect(video);
-  
-        // Draw mesh
-        // const ctx = canvasRef.current.getContext("2d");
-        // drawRect(obj, ctx); 
       }
     };
   
@@ -64,33 +55,21 @@ const VideoFilter = () => {
             ref={webcamRef}
             muted={true} 
             style={{
-              position: "absolute",
-              marginLeft: "auto",
-              marginRight: "auto",
-              left: 0,
-              right: 0,
-              textAlign: "center",
-              zindex: 9,
-              width: 640,
-              height: 480,
-            }}
-          />
-  
-          <canvas
-            ref={canvasRef}
-            style={{
-              position: "absolute",
-              marginLeft: "auto",
-              marginRight: "auto",
-              left: 0,
-              right: 0,
-              textAlign: "center",
-              zindex: 8,
+              // position: "absolute",
+              // marginLeft: "auto",
+              // marginRight: "auto",
+              // left: 0,
+              // right: 0,
+              // textAlign: "center",
+              // zindex: 1,
               width: 640,
               height: 480,
             }}
           />
         </header>
+        <div>
+          <h1 className={'bg-red-600 text-7xl'}>{currentPose}</h1>
+        </div>
       </div>
     );
 };
