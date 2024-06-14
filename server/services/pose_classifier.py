@@ -1,7 +1,7 @@
 import joblib
-from typing import Dict
+from typing import Dict, List
 import numpy as np
-from config.constants import FEATURE_ORDER
+from config.constants import FEATURE_ORDER, PREDICTION_THRESHOLD
 
 class PoseClassifier:
     _instance = None
@@ -15,10 +15,14 @@ class PoseClassifier:
     def __initialize(self):
         self.model = joblib.load('pose_classifier.pkl')
     
-    def classify_pose(self, features: Dict[str, float]) -> str:
+    def classify_pose(self, features: Dict[str, float]) -> str | None:
         features_array = PoseClassifier._parse_features_array(features)
-        pose_name = self.model.predict(features_array)[0]
-        return pose_name
+        probabilities: np.ndarray = self.model.predict_proba(features_array)[0]
+        classes = self.model.classes_
+        max_prob = max(probabilities)
+        max_prob_index = list(probabilities).index(max_prob)
+        max_prob_pose = classes[max_prob_index]
+        return max_prob_pose if max_prob > PREDICTION_THRESHOLD else None
     
     def get_pose_probability(self, features: Dict[str, float], pose_to_check: str) -> float:
         features_array = PoseClassifier._parse_features_array(features)
@@ -31,7 +35,15 @@ class PoseClassifier:
             pose_probability = 0
         return pose_probability
     
+    def get_all_poses_names(self) -> List[str]:
+        return list(self.model.classes_)
+    
     @staticmethod
     def _parse_features_array(features: Dict[str, float]) -> np.ndarray:
         features_list = [features.get(col, 0) for col in FEATURE_ORDER]
         return np.array(features_list).reshape(1, -1)
+    
+    @staticmethod
+    def _get_max_value_index(probabilities: List[float]) -> int:
+        max_value = max(probabilities)
+        return probabilities.index(max_value)

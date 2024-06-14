@@ -41,9 +41,7 @@ class FeaturesAnalyzer:
             if a_name in self.keypoints and b_name in self.keypoints:
                 a = self.keypoints[a_name]
                 b = self.keypoints[b_name]
-                x_diff = a['x'] - b['x']
                 y_diff = a['y'] - b['y']
-                gaps[f"{a_name}_{b_name}_x_gap"] = x_diff
                 gaps[f"{a_name}_{b_name}_y_gap"] = y_diff
         return gaps
     
@@ -63,11 +61,16 @@ class FeaturesAnalyzer:
 
     def _calculate_distance_features(self) -> Dict[str, float]:
         distances = {}
+        # set the shoulder distance as the reference distance
+        a = self.keypoints['left_shoulder']
+        b = self.keypoints['right_shoulder']
+        shoulder_dist = FeaturesAnalyzer._calculate_distance(a, b)
+        
         for a_name, b_name in DISTANCE_PAIRS:
             if a_name in self.keypoints and b_name in self.keypoints:
                 a = self.keypoints[a_name]
                 b = self.keypoints[b_name]
-                dist = FeaturesAnalyzer._calculate_distance(a, b)
+                dist = FeaturesAnalyzer._calculate_distance(a, b) / shoulder_dist
                 distances[f"{a_name}_{b_name}_distance"] = dist
         return distances
         
@@ -80,7 +83,8 @@ class FeaturesAnalyzer:
         angle = np.abs(radians * 180.0 / np.pi)
         if angle > 180.0:
             angle = 360 - angle
-        return float(f"{angle:.3f}")
+        angle /= 180.0
+        return float(f"{angle:.5f}")
 
     @staticmethod
     def _calculate_distance(a: Dict[str, float], b: Dict[str, float]) -> float:
@@ -89,7 +93,7 @@ class FeaturesAnalyzer:
         dist = np.linalg.norm(a - b)
         # Scale the distance by image dimensions (640x480) to get pixel distance
         result = dist * np.sqrt(640**2 + 480**2)
-        return float(f"{result:.3f}")
+        return float(f"{result:.5f}")
     
     @staticmethod
     def _extract_keypoints(image_process_result):
