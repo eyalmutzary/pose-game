@@ -8,11 +8,13 @@ import { Button } from '@/lib/components/Button'
 export default function Home() {
   return (
     <WebsiteScreen className={'flex'}>
+      {/* Create a centered div: */}
       <div className={'flex flex-col items-center justify-center h-full w-full gap-8'}>
         <Logo />
         <Button onClick={() => {}}>Start</Button>
         <Button onClick={() => {}}>Leaderboard</Button>
       </div>
+      {/* <VideoFilter /> */}
     </WebsiteScreen>
   )
 }
