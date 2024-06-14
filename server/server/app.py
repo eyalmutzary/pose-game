@@ -1,9 +1,10 @@
-from controller import test_controller
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import ValidationError
 from utils.exceptions import AppException
+
+from controller import image_controller
 
 from .exception_handler_layer import (
     application_exception_handler,
@@ -24,7 +25,7 @@ app.add_middleware(
 )
 
 # * Routers
-app.include_router(test_controller.test_router)
+app.include_router(image_controller.image_router)
 
 # * Exception Handlers
 app.add_exception_handler(RequestValidationError, request_validation_exception_handler)

@@ -1,6 +1,12 @@
 fastapi==0.110.1
 uvicorn==0.29.0
 python-dotenv==1.0.1
+opencv-python==4.10.0.82
+pillow==10.3.0
+numpy==1.26.4
+mediapipe==0.10.14
+joblib==1.4.2
+scikit-learn==1.5.0
 
 # Testing
 pytest==8.1.1
