@@ -33,16 +33,16 @@ const VideoFilter = () => {
         const imageSrc = webcamRef.current.getScreenshot();
 
         // Send the image to the server
-        if (imageSrc) {
-          try {
-            const response = await axios.post('https://ubuvdip2130:8001/images/analyze', { image: imageSrc })
-            // const data = await response.json();
-            console.log(response.data);
-            setCurrentPose(response.data.data ?? "None");
-          } catch (error) {
-            console.error('Error sending image:', error);
-          }
-        }
+        // if (imageSrc) {
+        //   try {
+        //     const response = await axios.post('https://ubuvdip2130:8001/images/analyze', { image: imageSrc })
+        //     // const data = await response.json();
+        //     console.log(response.data);
+        //     setCurrentPose(response.data.data ?? "None");
+        //   } catch (error) {
+        //     console.error('Error sending image:', error);
+        //   }
+        // }
       }
     };
   
@@ -55,6 +55,7 @@ const VideoFilter = () => {
             ref={webcamRef}
             muted={true} 
             style={{
+              borderRadius: 2,
               // position: "absolute",
               // marginLeft: "auto",
               // marginRight: "auto",
@@ -62,8 +63,8 @@ const VideoFilter = () => {
               // right: 0,
               // textAlign: "center",
               // zindex: 1,
-              width: 640,
-              height: 480,
+              // width: 640,
+              // height: 480,
             }}
           />
         </header>
