@@ -1,0 +1,7 @@
+export { default as high_bridge_image } from './high-bridge-output_image.png'
+export { default as jumping_jack_image } from './jumping-jack-output_image.png'
+export { default as lunge_hands_up_image } from './lunge-hands-up-output_image.png'
+export { default as one_leg_stand_image } from './one-leg-stand-output_image.png'
+export { default as deep_squat_image } from './deep-squat-output_image.png'
+export { default as plank_image } from './plank-output_image.png'
+export { default as hands_to_toes_image } from './hands-to-toes-output_image.png'

@@ -2,9 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import Webcam from "react-webcam";
 import axios from 'axios';
 
-const VideoFilter = () => {
+const VideoFilter = ({setCurrentPose}) => {
     const webcamRef = useRef(null);
-    const [currentPose, setCurrentPose] = useState(null);
+    // const [currentPose, setCurrentPose] = useState(null);
   
     // Main function
     const runCoco = async () => {
@@ -33,24 +33,24 @@ const VideoFilter = () => {
         const imageSrc = webcamRef.current.getScreenshot();
 
         // Send the image to the server
-        // if (imageSrc) {
-        //   try {
-        //     const response = await axios.post('https://ubuvdip2130:8001/images/analyze', { image: imageSrc })
-        //     // const data = await response.json();
-        //     console.log(response.data);
-        //     setCurrentPose(response.data.data ?? "None");
-        //   } catch (error) {
-        //     console.error('Error sending image:', error);
-        //   }
-        // }
+        if (imageSrc) {
+          try {
+            // TODO: change to env variable
+            const response = await axios.post('https://ubuvdip2130:8001/images/analyze-pose', { image: imageSrc })
+            // const data = await response.json();
+            const poseFound = response.data.data;
+            setCurrentPose(response.data.data ?? "None");
+          } catch (error) {
+            console.error('Error sending image:', error);
+          }
+        }
       }
     };
   
     useEffect(()=>{runCoco()},[]);
   
     return (
-      <div className="App">
-        <header className="App-header">
+
           <Webcam
             ref={webcamRef}
             muted={true} 
@@ -67,11 +67,7 @@ const VideoFilter = () => {
               // height: 480,
             }}
           />
-        </header>
-        <div>
-          <h1 className={'bg-red-600 text-7xl'}>{currentPose}</h1>
-        </div>
-      </div>
+
     );
 };
 

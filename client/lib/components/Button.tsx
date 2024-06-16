@@ -6,9 +6,9 @@ type ButtonProps = {
     onClick: () => void;
 };
 
-export const Button: FC<ButtonProps> = ({ children, onClick }) => {
+export const Button: FC<ButtonProps> = ({ children, ...rest }) => {
     return (
-        <Container onClick={onClick} className="text-[1.5em] text-center min-w-48 font-bold cursor-pointer">
+        <Container {...rest} className="text-[1.5em] text-center min-w-48 font-bold cursor-pointer active:bg-orangeTheme">
             {children}
         </Container>
     );
