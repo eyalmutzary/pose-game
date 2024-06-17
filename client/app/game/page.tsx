@@ -16,6 +16,7 @@ export type Box = {
   duration: number
   pose: Poses
   isSpecial: boolean
+  isSuccessful: boolean
 }
 
 const CREATE_BOX_INTERVAL = 3000
@@ -25,7 +26,7 @@ const BOX_BASE_LIFETIME = 8
 const MIN_BOX_LIFETIME = 4
 const BASE_BOX_SCORE = 1
 const SPECIAL_BOX_SCORE = 2
-const SPECIAL_BOX_PROBABILITY = 0.2
+const SPECIAL_BOX_PROBABILITY = 0.8
 
 export default function Home() {
   const [boxes, setBoxes] = useState<{ [id: number]: Box }>({})
@@ -67,7 +68,7 @@ export default function Home() {
         } else {
           setScore((prevScore) => prevScore + BASE_BOX_SCORE)
         }
-        removeBox(Number(id))
+        setSuccessfulBox(Number(id))
         break
       }
     }
@@ -97,13 +98,21 @@ export default function Home() {
     const randomPose = values[randomIndex]
     const isSpecial = Math.random() > (1-SPECIAL_BOX_PROBABILITY)
     if (isSpecial) {
-      return { duration: MIN_BOX_LIFETIME, pose: randomPose, isSpecial: true }
+      return { duration: MIN_BOX_LIFETIME, pose: randomPose, isSpecial: true, isSuccessful: false}
     }
     const duration = Math.max(
       BOX_BASE_LIFETIME - Math.floor(Math.random() * (score / 3)),
       MIN_BOX_LIFETIME
     )
-    return { duration, pose: randomPose, isSpecial: false }
+    return { duration, pose: randomPose, isSpecial: false, isSuccessful: false }
+  }
+
+  const setSuccessfulBox = (id: number): void => {
+    setBoxes((prevBoxes) => {
+      const newBoxes = { ...prevBoxes }
+      newBoxes[id].isSuccessful = true
+      return newBoxes
+    })
   }
 
   const removeBox = (id: number): void => {
