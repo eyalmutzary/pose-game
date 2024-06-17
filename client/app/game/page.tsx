@@ -26,7 +26,7 @@ const BOX_BASE_LIFETIME = 8
 const MIN_BOX_LIFETIME = 4
 const BASE_BOX_SCORE = 1
 const SPECIAL_BOX_SCORE = 2
-const SPECIAL_BOX_PROBABILITY = 0.8
+const SPECIAL_BOX_PROBABILITY = 0.2
 
 export default function Home() {
   const [boxes, setBoxes] = useState<{ [id: number]: Box }>({})
