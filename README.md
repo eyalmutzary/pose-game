@@ -4,7 +4,9 @@ Pose Rush is an interactive game where players must mimic running postures displ
 
 ## Video Demo
 
-[Full gameplay](https://www.youtube.com/watch?v=QJji96QjGp4).
+### [Full gameplay](https://www.youtube.com/watch?v=QJji96QjGp4).
+
+![](https://github.com/eyalmutzary/pose-game/blob/main/main_page.png)
 
 
 ## Features
