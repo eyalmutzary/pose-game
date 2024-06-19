@@ -20,8 +20,8 @@ Pose Rush is an interactive game where players must mimic running postures displ
 
 - **Computer Vision:** Utilizes the Mediapipe library to analyze body parts.
 - **Machine Learning:** A random forest model classifies postures based on features such as angles (e.g., elbow angle), distances (e.g., wrist distances), and horizontal gaps.
-- **UI/UX Design:** Designed using Figma (link to design will be added).
-- **Frontend:** Built with React.
+- **UI/UX Design:** Designed using Figma ([link](https://www.figma.com/design/5Uv3KvVsthIiGs3kLwrhdx/Pose-Game?node-id=0-1&t=wZusfnSXqgL62XnC-1)).
+- **Frontend:** Built with React (NextJS).
 - **Backend:** FastAPI server processes images and returns detected postures.
 
 ## How It Works
@@ -32,7 +32,7 @@ Pose Rush is an interactive game where players must mimic running postures displ
 4. **UI Design:** Figma was used to design the user interface.
 5. **Server-Client Interaction:** 
    - The FastAPI server receives images and returns the detected postures.
-   - The React client handles gameplay mechanics, displaying postures, and scoring.
+   - The React (NextJS) client handles gameplay mechanics, displaying postures, and scoring.
 
 ## Installation Locally
 
